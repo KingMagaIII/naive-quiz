@@ -1,0 +1,52 @@
+body {
+    background: skyblue;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.quiz {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    width: 400px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.domanda {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.risposta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#campoDiTesto {
+    padding: 10px;
+    border: 2px violet;
+    border-radius: 5px;
+    width: 300px;
+}
+
+#bottone {
+    background-color: violet;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 35px;
+    width: 100px;
+    margin-top: 20px;
+}

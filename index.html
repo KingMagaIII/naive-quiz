@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style/index.css">
+    <title>Quiz</title>
+</head>
+
+<body>
+    <div class="quiz">
+        <form action="">
+            <div class="container">
+                <div class="domanda">
+                    <span id="nDomanda"></span>
+                    <span id="domanda"></span>
+                </div>
+                <div class="risposta">
+                    <input type="text" name="answer" placeholder="Inserisci la risposta" />
+                    <input type="submit" value="Rispondi" id="bottone" />
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+
+    <script>
+        let domande = [
+            {
+                "numDomanda": 1,
+                "domanda": ") Qual è la capitale dell'Italia?",
+                "rispostaUtente": "",
+                "rispostaCorretta": "Roma",
+            },
+            {
+                "numDomanda": 2,
+                "domanda": ") In che anno l'Italia è diventata una Repubblica?",
+                "rispostaUtente": "",
+                "rispostaCorretta": "1946",
+            },
+            {
+                "numDomanda": 3,
+                "domanda": ") Come si chiama il fiume più lungo d'Italia?",
+                "rispostaUtente": "",
+                "rispostaCorretta": "Po",
+            },
+            {
+                "numDomanda": 4,
+                "domanda": ") Chi è la mascotte della classe 4ITIAC?",
+                "rispostaUtente": "",
+                "rispostaCorretta": "Frank",
+            },
+            {
+                "numDomanda": 5,
+                "domanda": ") Chi è la carotina della classe?",
+                "rispostaUtente": "",
+                "rispostaCorretta": "Lorusso",
+            },
+        ]
+
+        window.addEventListener("load", function () {
+            let domandaCorrente = 0;
+            let punteggio = 0;
+            let obj = domande[domandaCorrente];
+            let ndomanda = document.querySelector("#nDomanda");
+            let domanda = document.querySelector("#domanda");
+            let form = document.querySelector("form")
+            ndomanda.innerHTML = obj["numDomanda"];
+            domanda.innerHTML = obj["domanda"];
+
+            function sanitize(a) {
+                return a.trim().toLowerCase();
+            }
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                let rispostaUtente = document.querySelector("[name=answer]").value;
+                rispostaUtente = sanitize(rispostaUtente);
+                console.log(rispostaUtente)
+                obj["rispostaUtente"] = rispostaUtente.value;
+                domandaCorrente++;
+
+                if (domandaCorrente < domande.length) {
+                    obj = domande[domandaCorrente]
+                    ndomanda.innerHTML = obj["numDomanda"];
+                    domanda.innerHTML = obj["domanda"];
+                }
+                else {
+                    punteggio++;
+                }
+            })
+
+        })
+    </script>
+</body>
+
+</html>
