@@ -11,14 +11,15 @@
 <body>
     <div class="quiz">
         <form action="">
-            <div class="container">
+            <div class="">
                 <div class="domanda">
                     <span id="nDomanda"></span>
                     <span id="domanda"></span>
                 </div>
                 <div class="risposta">
-                    <input type="text" name="answer" placeholder="Inserisci la risposta" />
+                    <input type="text" name="answer" placeholder="Inserisci la risposta" id="campoDiTesto" />
                     <input type="submit" value="Rispondi" id="bottone" />
+                    <span class="risposta" id="punteggio"></span>
                 </div>
             </div>
         </form>
@@ -31,7 +32,7 @@
                 "numDomanda": 1,
                 "domanda": ") Qual è la capitale dell'Italia?",
                 "rispostaUtente": "",
-                "rispostaCorretta": "Roma",
+                "rispostaCorretta": "roma",
             },
             {
                 "numDomanda": 2,
@@ -43,29 +44,31 @@
                 "numDomanda": 3,
                 "domanda": ") Come si chiama il fiume più lungo d'Italia?",
                 "rispostaUtente": "",
-                "rispostaCorretta": "Po",
+                "rispostaCorretta": "po",
             },
             {
                 "numDomanda": 4,
                 "domanda": ") Chi è la mascotte della classe 4ITIAC?",
                 "rispostaUtente": "",
-                "rispostaCorretta": "Frank",
+                "rispostaCorretta": "frank",
             },
             {
                 "numDomanda": 5,
                 "domanda": ") Chi è la carotina della classe?",
                 "rispostaUtente": "",
-                "rispostaCorretta": "Lorusso",
+                "rispostaCorretta": "lorusso",
             },
         ]
 
         window.addEventListener("load", function () {
             let domandaCorrente = 0;
             let punteggio = 0;
+            let puntiFinali = document.querySelector("#punteggio");
             let obj = domande[domandaCorrente];
             let ndomanda = document.querySelector("#nDomanda");
             let domanda = document.querySelector("#domanda");
             let form = document.querySelector("form")
+            let bottone = document.querySelector("#bottone")
             ndomanda.innerHTML = obj["numDomanda"];
             domanda.innerHTML = obj["domanda"];
 
@@ -75,19 +78,26 @@
 
             form.addEventListener("submit", function (e) {
                 e.preventDefault();
-                let rispostaUtente = document.querySelector("[name=answer]").value;
-                rispostaUtente = sanitize(rispostaUtente);
-                console.log(rispostaUtente)
-                obj["rispostaUtente"] = rispostaUtente.value;
+                let rispostaUtente = document.querySelector("[name=answer]");
+                let input = sanitize(rispostaUtente.value);
+                console.log(input)
+                obj["rispostaUtente"] = input;
                 domandaCorrente++;
 
-                if (domandaCorrente < domande.length) {
+                if (domandaCorrente < 5) {
                     obj = domande[domandaCorrente]
                     ndomanda.innerHTML = obj["numDomanda"];
                     domanda.innerHTML = obj["domanda"];
+                    rispostaUtente.value = "";
                 }
                 else {
-                    punteggio++;
+                    for (let i = 0; i < 5; i++) {
+                        obj = domande[i]
+                        if (obj["rispostaUtente"] === obj["rispostaCorretta"]) {
+                            punteggio += 1;
+                        }
+                    }
+                    puntiFinali.innerHTML = "Punteggio: " + punteggio + "/5";
                 }
             })
 
