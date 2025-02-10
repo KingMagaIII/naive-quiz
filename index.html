@@ -19,11 +19,10 @@
                 <div class="risposta">
                     <input type="text" name="answer" placeholder="Inserisci la risposta" id="campoDiTesto" />
                     <input type="submit" value="Rispondi" id="bottone" />
-                    <span class="risposta" id="punteggio"></span>
+                    span id="punteggio"></span>
                 </div>
             </div>
         </form>
-
     </div>
 
     <script>
@@ -80,7 +79,6 @@
                 e.preventDefault();
                 let rispostaUtente = document.querySelector("[name=answer]");
                 let input = sanitize(rispostaUtente.value);
-                console.log(input)
                 obj["rispostaUtente"] = input;
                 domandaCorrente++;
 
@@ -97,7 +95,6 @@
                             punteggio += 1;
                         }
                     }
-                    bottone.disabled = true;
                     puntiFinali.innerHTML = "Punteggio: " + punteggio + "/5";
                 }
             })
